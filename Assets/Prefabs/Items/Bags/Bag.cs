@@ -33,6 +33,16 @@ public class Bag : Item {
     {
         MyBagScript = Instantiate(bagPrefab, InventoryScript.MyInstance.transform).GetComponent<BagScript>();
         MyBagScript.AddSlots(amountOfSlots);
+
+        //Tell the Inventory which bag we are equipping
+        InventoryScript.MyInstance.AddBag(this);
+    }
+
+    //Use this only to declare the starting slots of your inventory (fake bag)
+    public void FixedUse()
+    {
+        MyBagScript = Instantiate(bagPrefab, InventoryScript.MyInstance.transform).GetComponent<BagScript>();
+        MyBagScript.AddSlots(amountOfSlots);
     }
 
 }

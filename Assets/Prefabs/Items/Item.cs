@@ -10,10 +10,10 @@ public class Item : ScriptableObject {
     [SerializeField]
     private int stackSize;
 
-    private InvSlotScript slot;
+    private SlotScript slot;
 
 
-    public Sprite Icon
+    public Sprite MyIcon
     {
         get
         {
@@ -31,7 +31,7 @@ public class Item : ScriptableObject {
     }
 
 
-    protected InvSlotScript Slot
+    protected SlotScript Slot
     {
         get
         {
