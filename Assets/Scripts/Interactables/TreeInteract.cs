@@ -56,7 +56,7 @@ public class TreeInteract : Interactable {
             for (int i = 0; i < logsArr.Length; i++)
             {
                 //For all logs spawned, enable collision with items
-                //logsArr[i].GetComponentInChildren<SphereCollider>().enabled = true;
+                logsArr[i].GetComponentInChildren<SphereCollider>().enabled = true;
             }
             //Delete this GameObject
             Destroy(this.gameObject);

@@ -26488,7 +26488,7 @@ Prefab:
     - target: {fileID: 114261976293301978, guid: 70a43febc01ce9a43857c67ee110b3d2,
         type: 2}
       propertyPath: AmountOfTrees
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 114261976293301978, guid: 70a43febc01ce9a43857c67ee110b3d2,
         type: 2}
