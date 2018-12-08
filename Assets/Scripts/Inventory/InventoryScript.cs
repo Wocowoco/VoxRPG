@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class InventoryScript : MonoBehaviour {
 
-    //Make it so there's only one inventoryScript
-    private static InventoryScript instance;
-
     [SerializeField]
     private BagSlot bagSlot;
     [SerializeField]
     private BagSlot fixedBag;
+
+    //Make it so there's only one inventoryScript
+    private static InventoryScript instance;
 
     public static InventoryScript MyInstance
     {
@@ -25,19 +25,14 @@ public class InventoryScript : MonoBehaviour {
         }
     }
 
-    public void AddItem(Item item)
+    public BagSlot MyBagSlot
     {
-        //Check all bags for a slot to add the item in.
-        //foreach (Bag bag in bags)
-        //{
-        //    //Check if an item can be added in this bag
-        //    if (bag.MyBagScript.AddItem(item) == true)
-        //    {
-        //        //If true, the item was succesfully placed in a slot in the bag.
-        //        return;
-        //    }
-        //}
+        get
+        {
+            return bagSlot;
+        }
     }
+
 
 
     [SerializeField]
@@ -54,16 +49,22 @@ public class InventoryScript : MonoBehaviour {
 
     private void Update()
     {
+        //Spawn bag in bagslot
         if (Input.GetKeyDown(KeyCode.J))
         {
             Bag bag = (Bag)Instantiate(items[0]);
             bag.Initialize(4);
             bag.Use();
         }
+
+        //Debug: Spawn bag in inventory
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Bag bag = (Bag)Instantiate(items[0]);
+            bag.Initialize(4);
+            AddItem(bag);
+        }
     }
-
-
-
 
     public void AddBag(Bag bag)
     {
@@ -72,6 +73,24 @@ public class InventoryScript : MonoBehaviour {
         {
             bagSlot.MyBag = bag;
 
+        }
+    }
+
+    public void AddItem(Item item)
+    {
+
+        //Check if the fixed bag can take an item
+        if (fixedBag.MyBag.MyBagScript.AddItem(item) == true)
+        {
+            //If true, the item was succesfully placed in a slot in the bag.
+            return;
+        }
+
+        //Check the second equiped bag if there's space for the item, if there is a second bag equipped equiped
+        else if (bagSlot.MyBag.MyBagScript != null && bagSlot.MyBag.MyBagScript.AddItem(item) == true)
+        {
+            //If true, the item was succesfully placed in a slot in the bag.
+            return;
         }
     }
 
