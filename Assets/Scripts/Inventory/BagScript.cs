@@ -9,6 +9,14 @@ public class BagScript : MonoBehaviour {
     private GameObject SlotPrefab;
     private List<SlotScript> slotList = new List<SlotScript>();
 
+    public List<SlotScript> MySlots
+    {
+        get
+        {
+            return slotList;
+        }
+    }
+
     public void AddSlots(int slotCount)
     {
         //For each slot created, add it to the slotslist

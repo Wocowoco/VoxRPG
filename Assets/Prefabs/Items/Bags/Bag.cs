@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Bag", menuName ="Items/Bag", order =1)]
 public class Bag : Item {
 
+
     private int amountOfSlots;
 
     [SerializeField]
@@ -29,7 +30,7 @@ public class Bag : Item {
     }
 
 
-    public void Use()
+    override public void Use()
     {
         //Check if there the bag slot is still empty before adding it
         if (InventoryScript.MyInstance.MyBagSlot.MyBag == null)
@@ -37,8 +38,14 @@ public class Bag : Item {
             MyBagScript = Instantiate(bagPrefab, InventoryScript.MyInstance.transform).GetComponent<BagScript>();
             MyBagScript.AddSlots(amountOfSlots);
 
+
+
+            //Remove item from inventory
+            Remove();
+
             //Tell the Inventory which bag we are equipping
             InventoryScript.MyInstance.AddBag(this);
+
         }
     }
 

@@ -3828,6 +3828,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 224121187098217118, guid: d9bc91a3544cda643addb9df45870764,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -3937,6 +3942,126 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 548ff6c5e409a9240b8b1b7a0873f7d6,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[13]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[14]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[15]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[16]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[17]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[18]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[19]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
+    - target: {fileID: 114190602024310714, guid: d9bc91a3544cda643addb9df45870764,
+        type: 2}
+      propertyPath: items.Array.data[20]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114441843915205262, guid: d9bc91a3544cda643addb9df45870764, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: d9bc91a3544cda643addb9df45870764, type: 2}
@@ -10869,8 +10994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 1185338821}
-  full: {fileID: 0}
-  empty: {fileID: 0}
+  StackSize: {fileID: 0}
 --- !u!114 &703308119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19702,8 +19826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 1251622368}
-  full: {fileID: 0}
-  empty: {fileID: 0}
+  StackSize: {fileID: 0}
 --- !u!1001 &1221014098
 Prefab:
   m_ObjectHideFlags: 0

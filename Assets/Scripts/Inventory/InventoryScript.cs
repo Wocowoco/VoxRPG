@@ -44,19 +44,11 @@ public class InventoryScript : MonoBehaviour {
         Bag bag = (Bag)Instantiate(items[0]);
         bag.Initialize(10);
         bag.FixedUse();
-        fixedBag.MyBag = bag;
+        fixedBag.AddItem(bag);
     }
 
     private void Update()
     {
-        //Spawn bag in bagslot
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            Bag bag = (Bag)Instantiate(items[0]);
-            bag.Initialize(4);
-            bag.Use();
-        }
-
         //Debug: Spawn bag in inventory
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -64,34 +56,102 @@ public class InventoryScript : MonoBehaviour {
             bag.Initialize(4);
             AddItem(bag);
         }
+
+        //Debug: Spawn bark in inventory
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Item item = Instantiate(items[1]);
+            AddItem(item);
+        }
+
+
     }
+
 
     public void AddBag(Bag bag)
     {
         //If there's no bag equipped yet, equip one
-        if (bagSlot.MyBag == null)
+        if (bagSlot.MyItem == null)
         {
-            bagSlot.MyBag = bag;
-
+            bagSlot.AddItem(bag);
         }
+    }
+
+
+    private void PlaceInEmptySlot(Item item)
+    {
+        //Check all slots in the fixed bag
+        foreach (SlotScript slot in fixedBag.MyBag.MyBagScript.MySlots)
+        {
+            //Try to add an item to the fixed bag
+            if (fixedBag.MyBag.MyBagScript.AddItem(item))
+            {
+                //Succesfully added item in new slot
+                return;
+            }
+        }
+
+        //Check if there is a second bag equipped
+        if (bagSlot.MyItem != null)
+        {
+            //Check all slots in the equiped bag
+            foreach (SlotScript slot in bagSlot.MyBag.MyBagScript.MySlots)
+            {
+                //Try to add an item to the second bag
+                if (bagSlot.MyBag.MyBagScript.AddItem(item))
+                {
+                    //Succesfully added item in new slot
+                    return;
+                }
+            }
+        }
+    }
+
+    private bool PlaceInStack(Item item)
+    {
+
+        //Check all slots in the fixed bag
+        foreach (SlotScript slot in fixedBag.MyBag.MyBagScript.MySlots)
+        {
+            if (slot.StackItem(item))
+            {
+                //Succesfully stacked item
+                return true;
+            }
+        }
+
+        //Check if there is a second bag equipped
+        if (bagSlot.MyItem != null)
+        {
+            //Check all slots in the equiped bag
+            foreach (SlotScript slot in bagSlot.MyBag.MyBagScript.MySlots)
+            {
+                if (slot.StackItem(item))
+                {
+                    //Succesfully stacked item
+                    return true;
+                }
+            }
+        }
+
+        //Failed to add the item to a stack
+        return false;
     }
 
     public void AddItem(Item item)
     {
-
-        //Check if the fixed bag can take an item
-        if (fixedBag.MyBag.MyBagScript.AddItem(item) == true)
+        //If the item is stackable, try stacking it
+        if (item.MyStackSize > 0)
         {
-            //If true, the item was succesfully placed in a slot in the bag.
-            return;
+            //Check if the can be placed on the stack
+            if (PlaceInStack(item))
+            {
+                return;
+            }
         }
 
-        //Check the second equiped bag if there's space for the item, if there is a second bag equipped equiped
-        else if (bagSlot.MyBag.MyBagScript != null && bagSlot.MyBag.MyBagScript.AddItem(item) == true)
-        {
-            //If true, the item was succesfully placed in a slot in the bag.
-            return;
-        }
+        //If item couldn't be placed in a stack, place it in a new slot instead
+        PlaceInEmptySlot(item);
     }
 
 }

@@ -28,8 +28,8 @@ public class CollidingCamera : MonoBehaviour {
     void Start () {
 
         //Lock the cursor;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
         //Get the rotation of the camera
         Vector3 rot = transform.localRotation.eulerAngles;
         rotY = rot.y;
