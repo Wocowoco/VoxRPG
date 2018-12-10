@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a9a8562b45d7c34a81acdc53e393d1d, type: 3}
-  m_Name: AshBark
+  m_Name: AshLog
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 26450aa7b9bc49e4c8e1356e2bd31ef1, type: 3}
-  stackSize: 5
+  icon: {fileID: 21300000, guid: 51680ddacbaa93543acbca1ebdde88b1, type: 3}
+  stackSize: 0
   isUseable: 0
-  itemObject: {fileID: 1969995721879348, guid: b6cef8a1e37e40e4bac55167befad03f, type: 2}
+  itemObject: {fileID: 1135173925565066, guid: 87d8ac019b71e9b48828d5869b2a0498, type: 2}

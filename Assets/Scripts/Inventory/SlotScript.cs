@@ -90,8 +90,9 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler
 
     virtual public void DropItem(Item item)
     {
-        //Drop the item in the world
-
+        //Drop the item in the world at the player's location
+        Transform playerTransform = GameManage.MyInstance.playerObject.transform;
+        GameObject droppedItem = Instantiate(MyItem.MyItemObject, new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z), Quaternion.Euler(0f,0f,0f));
 
         //Remove one of the items
         RemoveItem(item);
@@ -125,7 +126,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler
         //Check if rightclick
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            RemoveItem(MyItem);
+            DropItem(MyItem);
         }
     }
 

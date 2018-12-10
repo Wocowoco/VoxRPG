@@ -16,6 +16,9 @@ public class Item : ScriptableObject {
 
     private SlotScript slot;
 
+    [SerializeField]
+    private GameObject itemObject;
+
 
     public Sprite MyIcon
     {
@@ -55,6 +58,13 @@ public class Item : ScriptableObject {
         }
     }
 
+    public GameObject MyItemObject
+    {
+        get
+        {
+            return itemObject;
+        }
+    }
 
     virtual public void Use()
     {
