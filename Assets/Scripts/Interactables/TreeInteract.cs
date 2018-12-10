@@ -5,12 +5,14 @@ using UnityEngine;
 public class TreeInteract : Interactable {
 
     public GameObject LogToSpawn;
-    public int MinAmount = 1;
-    public int MaxAmount = 3;
+
+    public GameObject BarkToSpawn;
 
     float timePassed = 0.0f;
     private bool isActive = false;
     private GameObject[] logsArr;
+    private GameObject[] barkArr;
+
 
 
 
@@ -19,19 +21,48 @@ public class TreeInteract : Interactable {
         //Set the interact on active
         isActive = true;
 
+        //Make the tree disappear
+        this.GetComponent<MeshRenderer>().enabled = false;
+        BoxCollider[] boxArr = GetComponents<BoxCollider>();
+        for (int j = 0; j < boxArr.Length; j++)
+        {
+            boxArr[j].enabled = false;
+        }
+
+        //------
+        //BARK
+        //------
+        //How much bark to spawn
+
+        int amount = GetAmount(4, 30);
+        barkArr = new GameObject[amount];
+        for (int i = 0; i < amount; i++)
+        {
+
+            //Spawn a bark, slightly above the ground
+            Vector3 spawnLoc = new Vector3(transform.position.x, transform.position.y + (i * 0.1f), transform.position.z);
+            barkArr[i] = Instantiate(BarkToSpawn, spawnLoc, Quaternion.Euler(0f, Random.Range(0f, 180f), 0f));
+            //For all bark spawned, disable their collision with items
+            barkArr[i].GetComponentInChildren<SphereCollider>().enabled = false;
+            //Shoot the bark away from the tree
+            Vector3 shootForce = new Vector3(Random.Range(-4.0f, 4.0f), Random.Range(10.0f, 15.0f), Random.Range(-4.0f, 4.0f));
+            shootForce.Normalize();
+            barkArr[i].GetComponent<Rigidbody>().AddForce(shootForce * 250f);
+        }
+
+
+        //------
+        //LOGS
+        //------
+
         //How many logs to spawn
-        int amount = Random.Range(MinAmount,MaxAmount);
+        //
+        //Add code to check for which axe is being used, and give logs according to modifiers. Currently always one log is spawned.
+        //
+        amount = 1;
         logsArr = new GameObject[amount];
         for (int i = 0; i < amount; i++)
         {
-            //Make the tree disappear
-            this.GetComponent<MeshRenderer>().enabled = false;
-            BoxCollider[] boxArr = GetComponents<BoxCollider>();
-            for (int j = 0; j < boxArr.Length; j++)
-            {
-                boxArr[j].enabled = false;
-            }
-
             //Spawn a log, slightly above the ground
             Vector3 spawnLoc = new Vector3(transform.position.x, transform.position.y + (i * 0.1f), transform.position.z);
             logsArr[i] = Instantiate(LogToSpawn, spawnLoc, Quaternion.Euler(0f, Random.Range(0f, 180f), 0f));
@@ -41,9 +72,6 @@ public class TreeInteract : Interactable {
             Vector3 shootForce = new Vector3(Random.Range(-4.0f, 4.0f), Random.Range(10.0f, 15.0f), Random.Range(-4.0f, 4.0f));
             shootForce.Normalize();
             logsArr[i].GetComponent<Rigidbody>().AddForce(shootForce * 250f);
-            
-
-
         }
 
         
@@ -53,9 +81,15 @@ public class TreeInteract : Interactable {
     {
         if (timePassed >= 0.5f)
         {
+            //For all bark spawned, enable collision with items
+            for (int i = 0; i < barkArr.Length; i++)
+            {
+                barkArr[i].GetComponentInChildren<SphereCollider>().enabled = true;
+            }
+
+            //For all logs spawned, enable collision with items
             for (int i = 0; i < logsArr.Length; i++)
             {
-                //For all logs spawned, enable collision with items
                 logsArr[i].GetComponentInChildren<SphereCollider>().enabled = true;
             }
             //Delete this GameObject
@@ -65,7 +99,22 @@ public class TreeInteract : Interactable {
         {
             timePassed += Time.deltaTime;
         }
+    }
+
+    private int GetAmount(int amountOfRolls, int chance)
+    {
+        int amount = 0;
+
+        for (int i = 0; i < amountOfRolls; i++)
+        {
+            //If value is higher than chance, add one to amount
+            if (Random.Range(0,101) <= chance) 
+            {
+                amount++;
+            }
+        }
 
 
+        return amount;
     }
 }

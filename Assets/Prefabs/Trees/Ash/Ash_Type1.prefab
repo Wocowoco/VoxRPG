@@ -122,5 +122,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LogToSpawn: {fileID: 1135173925565066, guid: 87d8ac019b71e9b48828d5869b2a0498, type: 2}
-  MinAmount: 3
-  MaxAmount: 3
+  BarkToSpawn: {fileID: 1969995721879348, guid: b6cef8a1e37e40e4bac55167befad03f,
+    type: 2}

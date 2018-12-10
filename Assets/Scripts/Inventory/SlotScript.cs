@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class SlotScript : MonoBehaviour, IPointerClickHandler
 {
-    //private Item item;
-
     protected Stack<Item> items = new Stack<Item>();
 
     [SerializeField]
@@ -66,7 +64,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler
         return true;
     }
 
-    public void RemoveItem(Item item)
+    virtual public void RemoveItem(Item item)
     {
         //Only remove items if there is an item
         if (items.Count > 0)
@@ -87,11 +85,16 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler
 
             }
 
-
-
-
-
         }
+    }
+
+    virtual public void DropItem(Item item)
+    {
+        //Drop the item in the world
+
+
+        //Remove one of the items
+        RemoveItem(item);
     }
 
     virtual public void UseItem()
@@ -110,11 +113,22 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler
     virtual public void OnPointerClick(PointerEventData eventData)
     {
         //Checking EventData
+
+        //Check if leftclick
         if (eventData.button == PointerEventData.InputButton.Left)
+            //If double leftclick
+            if (eventData.clickCount >= 2)
+            {
+                    UseItem();
+            }
+
+        //Check if rightclick
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
-            UseItem();
+            RemoveItem(MyItem);
         }
     }
+
 
     public bool StackItem(Item item)
     {

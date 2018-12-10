@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a9a8562b45d7c34a81acdc53e393d1d, type: 3}
   m_Name: AshBark
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 9ffb1253702103646b3161ab58744d6d, type: 3}
+  icon: {fileID: 21300000, guid: 26450aa7b9bc49e4c8e1356e2bd31ef1, type: 3}
   stackSize: 5
   isUseable: 0

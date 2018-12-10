@@ -44,4 +44,9 @@ public class BagScript : MonoBehaviour {
         return false;
 
     }
+
+    public void RemoveBag()
+    {
+        Destroy(this.gameObject);
+    }
 }
