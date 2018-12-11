@@ -47,7 +47,7 @@ public class TreeInteract : Interactable {
             //Shoot the bark away from the tree
             Vector3 shootForce = new Vector3(Random.Range(-4.0f, 4.0f), Random.Range(10.0f, 15.0f), Random.Range(-4.0f, 4.0f));
             shootForce.Normalize();
-            barkArr[i].GetComponent<Rigidbody>().AddForce(shootForce * 250f);
+            barkArr[i].GetComponentInChildren<Rigidbody>().AddForce(shootForce * 250f);
         }
 
 
@@ -71,7 +71,7 @@ public class TreeInteract : Interactable {
             //Shoot the log away from the tree
             Vector3 shootForce = new Vector3(Random.Range(-4.0f, 4.0f), Random.Range(10.0f, 15.0f), Random.Range(-4.0f, 4.0f));
             shootForce.Normalize();
-            logsArr[i].GetComponent<Rigidbody>().AddForce(shootForce * 250f);
+            logsArr[i].GetComponentInChildren<Rigidbody>().AddForce(shootForce * 250f);
         }
 
         

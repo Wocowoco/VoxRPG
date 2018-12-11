@@ -78,7 +78,7 @@ public class InventoryScript : MonoBehaviour {
     }
 
 
-    private void PlaceInEmptySlot(Item item)
+    private bool PlaceInEmptySlot(Item item)
     {
         //Check all slots in the fixed bag
         foreach (SlotScript slot in fixedBag.MyBag.MyBagScript.MySlots)
@@ -87,7 +87,7 @@ public class InventoryScript : MonoBehaviour {
             if (fixedBag.MyBag.MyBagScript.AddItem(item))
             {
                 //Succesfully added item in new slot
-                return;
+                return true;
             }
         }
 
@@ -101,10 +101,13 @@ public class InventoryScript : MonoBehaviour {
                 if (bagSlot.MyBag.MyBagScript.AddItem(item))
                 {
                     //Succesfully added item in new slot
-                    return;
+                    return true;
                 }
             }
         }
+
+        //If you got here, it failed to place the item in an empty slot
+        return false;
     }
 
     private bool PlaceInStack(Item item)
@@ -138,7 +141,7 @@ public class InventoryScript : MonoBehaviour {
         return false;
     }
 
-    public void AddItem(Item item)
+    public bool AddItem(Item item)
     {
         //If the item is stackable, try stacking it
         if (item.MyStackSize > 0)
@@ -146,12 +149,19 @@ public class InventoryScript : MonoBehaviour {
             //Check if the can be placed on the stack
             if (PlaceInStack(item))
             {
-                return;
+                return true;
             }
         }
 
         //If item couldn't be placed in a stack, place it in a new slot instead
-        PlaceInEmptySlot(item);
+        if (PlaceInEmptySlot(item))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }

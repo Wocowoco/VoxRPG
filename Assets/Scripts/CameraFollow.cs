@@ -17,8 +17,6 @@ public class CameraFollow : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         CameraOffset = transform.position - PivotTransform.position;
-
-        Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	// Update is called once per frame

@@ -22,8 +22,10 @@ GameObject:
   - component: {fileID: 33636471743187390}
   - component: {fileID: 23864731443060440}
   - component: {fileID: 95096882346266996}
+  - component: {fileID: 54820162532259536}
+  - component: {fileID: 135291638508817824}
   m_Layer: 10
-  m_Name: AshBark
+  m_Name: AshBarkModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,9 +55,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4943026062304988}
-  - component: {fileID: 54072231905684824}
-  - component: {fileID: 65437028927767504}
-  m_Layer: 10
+  - component: {fileID: 135236196284948380}
+  - component: {fileID: 114627878661682418}
+  m_Layer: 0
   m_Name: AshBark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1969995721879348}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7567252, y: 4, z: 6.852765}
+  m_LocalPosition: {x: -1.959, y: 4, z: 6.171}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4701067961518996}
@@ -145,12 +147,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1296147611092366}
   m_Mesh: {fileID: 4300000, guid: ec99d4c09b506574a83f9b3fd1611a9e, type: 3}
---- !u!54 &54072231905684824
+--- !u!54 &54820162532259536
 Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1969995721879348}
+  m_GameObject: {fileID: 1296147611092366}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -158,20 +160,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65437028927767504
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1969995721879348}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.2, z: 0.2}
-  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!95 &95096882346266996
 Animator:
   serializedVersion: 3
@@ -190,6 +180,42 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114627878661682418
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1969995721879348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772abb60001df3e4a95780bdbbc74c5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 548ff6c5e409a9240b8b1b7a0873f7d6, type: 2}
+--- !u!135 &135236196284948380
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1969995721879348}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.15
+  m_Center: {x: 0, y: 0.07, z: 0}
+--- !u!135 &135291638508817824
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1296147611092366}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!135 &135968451609363906
 SphereCollider:
   m_ObjectHideFlags: 1

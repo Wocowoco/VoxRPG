@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4947533905705100}
-  - component: {fileID: 54997431055334280}
-  - component: {fileID: 65258091772079856}
-  m_Layer: 10
+  - component: {fileID: 135227466865758672}
+  - component: {fileID: 114454146997988400}
+  m_Layer: 0
   m_Name: AshLog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,6 +55,8 @@ GameObject:
   - component: {fileID: 33938146443618180}
   - component: {fileID: 23410366551001356}
   - component: {fileID: 95195941738326480}
+  - component: {fileID: 54028630976580396}
+  - component: {fileID: 135100654239560798}
   m_Layer: 10
   m_Name: AshLogModel
   m_TagString: Untagged
@@ -95,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1135173925565066}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.07123, y: 4, z: 6.010296}
+  m_LocalPosition: {x: -1.4079876, y: 4, z: 6.896535}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4361592748938942}
@@ -145,12 +147,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1609029923580722}
   m_Mesh: {fileID: 4300000, guid: 141197106d7759f41afbeba577bb96fb, type: 3}
---- !u!54 &54997431055334280
+--- !u!54 &54028630976580396
 Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1135173925565066}
+  m_GameObject: {fileID: 1609029923580722}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -158,20 +160,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65258091772079856
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1135173925565066}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.19, z: 0.19}
-  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!95 &95195941738326480
 Animator:
   serializedVersion: 3
@@ -190,6 +180,42 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114454146997988400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1135173925565066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772abb60001df3e4a95780bdbbc74c5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: da5707f22ac9894469f9d1ab15224658, type: 2}
+--- !u!135 &135100654239560798
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1609029923580722}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 4.5, z: -0.5}
+--- !u!135 &135227466865758672
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1135173925565066}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!135 &135450850950181026
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -201,4 +227,4 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.15
-  m_Center: {x: 0, y: 0.1, z: 0}
+  m_Center: {x: 0, y: 0.25, z: 0}
