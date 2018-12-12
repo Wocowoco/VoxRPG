@@ -22,6 +22,8 @@ public class CollidingCamera : MonoBehaviour {
     public float FinalInputZ;
     public float SmoothX;
     public float SmoothY;
+    public bool IsAllowedToUpdate = true;
+
     private float rotY = 0.0f;
     private float rotX = 0.0f;
     // Use this for initialization
@@ -41,29 +43,29 @@ public class CollidingCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-    
-        //float inputX = Input.GetAxis("CONTROLLER STICK NAME HORIZONTAL"); 
-        //float inputY= Input.GetAxis("CONTROLLER STICK NAME VERTICAL");
-        MouseX = Input.GetAxis("Mouse X");
-        MouseY = Input.GetAxis("Mouse Y");
-        FinalInputX = MouseX; //Add inputX for controller support
-        FinalInputZ = MouseY; //Add inputY for controller support
+
+        if (IsAllowedToUpdate)
+        {
+            //float inputX = Input.GetAxis("CONTROLLER STICK NAME HORIZONTAL"); 
+            //float inputY= Input.GetAxis("CONTROLLER STICK NAME VERTICAL");
+            MouseX = Input.GetAxis("Mouse X");
+            MouseY = Input.GetAxis("Mouse Y");
+            FinalInputX = MouseX; //Add inputX for controller support
+            FinalInputZ = MouseY; //Add inputY for controller support
 
 
-        //Update Pivot Rotation (To walk with camera axis)
-        PivotPointPlayer.rotation = this.transform.rotation;
+            //Update Pivot Rotation (To walk with camera axis)
+            PivotPointPlayer.rotation = this.transform.rotation;
 
-        rotY += FinalInputX * InputSensitivity * Time.deltaTime;
-        rotX += FinalInputZ * InputSensitivity * Time.deltaTime;
+            rotY += FinalInputX * InputSensitivity * Time.deltaTime;
+            rotX += FinalInputZ * InputSensitivity * Time.deltaTime;
 
-        //Prevent camera from spinning all the way to the top or bottom
-        rotX = Mathf.Clamp(rotX, -ClampAngleBottom, ClampAngleTop);
+            //Prevent camera from spinning all the way to the top or bottom
+            rotX = Mathf.Clamp(rotX, -ClampAngleBottom, ClampAngleTop);
 
-        Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
-        transform.rotation = localRotation;
-
-        Debug.DrawRay(this.transform.position, PlayerObject.transform.position, Color.red, 0);
-
+            Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
+            transform.rotation = localRotation;
+        }
     }
 
     void LateUpdate()

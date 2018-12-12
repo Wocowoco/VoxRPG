@@ -13,42 +13,45 @@ public class CameraCollision : MonoBehaviour {
     public float Distance;
     public float currentMaxDistance;
     public LayerMask layerMask;
+    public bool IsAllowedToUpdate = true;
 	// Use this for initialization
 	void Awake () {
         dollyDir = transform.localPosition.normalized;
         Distance = transform.localPosition.magnitude;
         currentMaxDistance = MaxDistance;
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-
-        //Change Max Zoom based on scroll input
-        currentMaxDistance -= Input.GetAxis("Mouse ScrollWheel");
-        if (currentMaxDistance > MaxDistance)
+        if (IsAllowedToUpdate)
         {
-            currentMaxDistance = MaxDistance;
+            //Change Max Zoom based on scroll input
+            currentMaxDistance -= Input.GetAxis("Mouse ScrollWheel");
+            if (currentMaxDistance > MaxDistance)
+            {
+                currentMaxDistance = MaxDistance;
+            }
+            else if (currentMaxDistance < minDistance + 0.3f)
+            {
+                currentMaxDistance = minDistance + 0.3f;
+            }
+
+
+            Vector3 desiredCameraPos = transform.parent.TransformPoint(dollyDir * currentMaxDistance);
+            RaycastHit hit;
+
+            if (Physics.Linecast(transform.parent.position, desiredCameraPos, out hit, 1))
+            {
+                Distance = Mathf.Clamp((hit.distance * 0.95f), minDistance, currentMaxDistance);
+
+            }
+
+            else
+            {
+                Distance = currentMaxDistance;
+            }
+            transform.localPosition = Vector3.Lerp(transform.localPosition, dollyDir * Distance, Time.deltaTime * Smooth);
         }
-        else if (currentMaxDistance < minDistance + 0.3f)
-        {
-            currentMaxDistance = minDistance + 0.3f;
-        }
-
-        Vector3 desiredCameraPos = transform.parent.TransformPoint(dollyDir * currentMaxDistance);
-        RaycastHit hit;
-
-        if (Physics.Linecast(transform.parent.position, desiredCameraPos, out hit, 1))
-        {
-            Distance = Mathf.Clamp((hit.distance * 0.95f), minDistance, currentMaxDistance);
-
-        }
-
-        else
-        {
-            Distance = currentMaxDistance;
-        }
-
-        transform.localPosition = Vector3.Lerp(transform.localPosition, dollyDir * Distance, Time.deltaTime * Smooth);
 	}
 }

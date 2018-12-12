@@ -21,7 +21,7 @@ public class ItemPickup : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         //IF the player enters the range of the item, try to add it to the inventory
-        if (other.gameObject == gameManager.playerObject)
+        if (other.gameObject.tag == "Player")
         {
             if (InventoryScript.MyInstance.AddItem(item))
             {

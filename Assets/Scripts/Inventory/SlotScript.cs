@@ -47,7 +47,6 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler
         //Add item
         items.Push(item);
 
-
         //If the item is stackable, show it's stack count
         if(item.MyStackSize > 1)
         {
@@ -91,9 +90,11 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler
     virtual public void DropItem(Item item)
     {
         //Drop the item in the world at the player's location
-        Transform playerTransform = GameManage.MyInstance.playerObject.transform;
-        GameObject droppedItem = Instantiate(MyItem.MyItemObject, new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z), Quaternion.Euler(0f,0f,0f));
-
+        Transform playerTransform = GameManage.MyInstance.playerObject.GetComponent<PlayerMovement>().PlayerModel.transform;
+        Vector3 spawnLoc = playerTransform.position + playerTransform.forward * 0.5f;
+        GameObject droppedItem = Instantiate(MyItem.MyItemObject, new Vector3(spawnLoc.x, spawnLoc.y + 0.2f, spawnLoc.z), Quaternion.Euler(0f,0f,0f));
+        Vector3 dropDirection = new Vector3 (playerTransform.forward.x + Random.Range(-0.1f, 0.1f), playerTransform.forward.y + Random.Range(-0.1f, 0.1f), playerTransform.forward.z + Random.Range(-0.1f, 0.1f));     
+        droppedItem.GetComponent<Rigidbody>().AddForce(dropDirection * 350.0f);
         //Remove one of the items
         RemoveItem(item);
     }
