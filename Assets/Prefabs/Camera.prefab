@@ -153,6 +153,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  IsAllowedToUpdate: 1
 --- !u!114 &114677962243036418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,3 +182,4 @@ MonoBehaviour:
   FinalInputZ: 0
   SmoothX: 0
   SmoothY: 0
+  IsAllowedToUpdate: 1

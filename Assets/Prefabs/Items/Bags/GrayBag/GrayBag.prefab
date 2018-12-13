@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4573318305504786}
   - component: {fileID: 54800631361199822}
   - component: {fileID: 135896580686330240}
+  - component: {fileID: 114752079911980686}
   m_Layer: 10
   m_Name: GrayBag
   m_TagString: Untagged
@@ -39,7 +40,6 @@ GameObject:
   - component: {fileID: 33646716086246830}
   - component: {fileID: 23871741344578518}
   - component: {fileID: 95147843789108206}
-  - component: {fileID: 135270124297225140}
   m_Layer: 10
   m_Name: GrayBagModel
   m_TagString: Untagged
@@ -96,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1047907499391740}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.6805909, y: 6.308, z: 7.020994}
+  m_LocalPosition: {x: 1.6805909, y: 4.199, z: 7.020994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4532699716190450}
@@ -159,8 +159,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!95 &95147843789108206
 Animator:
   serializedVersion: 3
@@ -179,18 +179,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!135 &135270124297225140
-SphereCollider:
+--- !u!114 &114752079911980686
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1229466463624588}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_GameObject: {fileID: 1047907499391740}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 11.5
-  m_Center: {x: 0.5, y: 11.5, z: 0.5}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772abb60001df3e4a95780bdbbc74c5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 124fc9f8b96c6604ea8fe9a268b11190, type: 2}
 --- !u!135 &135896580686330240
 SphereCollider:
   m_ObjectHideFlags: 1

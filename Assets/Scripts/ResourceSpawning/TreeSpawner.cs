@@ -34,7 +34,7 @@ public class TreeSpawner : MonoBehaviour {
         //Choose a random spawnlocation within the spawnfield;
         float spawnLocX = Random.Range((posX - sizeX), (posX + sizeX));
         float spawnLocZ = Random.Range((posZ - sizeZ), (posZ + sizeZ));
-        Vector3 spawnLoc = new Vector3(spawnLocX, transform.position.y, spawnLocZ);
+        Vector3 spawnLoc = new Vector3(spawnLocX, transform.position.y - 0.05f, spawnLocZ);
         SpawnTree(spawnLoc);
 
 
@@ -104,7 +104,7 @@ public class TreeSpawner : MonoBehaviour {
                 break;
             }
 
-            spawnLoc = new Vector3(spawnLocX, transform.position.y, spawnLocZ);
+            spawnLoc = new Vector3(spawnLocX, transform.position.y - 0.05f, spawnLocZ);
             SpawnTree(spawnLoc);
             isValidLocation = false;
 

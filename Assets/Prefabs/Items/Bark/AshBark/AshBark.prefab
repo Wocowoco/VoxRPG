@@ -22,8 +22,6 @@ GameObject:
   - component: {fileID: 33636471743187390}
   - component: {fileID: 23864731443060440}
   - component: {fileID: 95096882346266996}
-  - component: {fileID: 54820162532259536}
-  - component: {fileID: 135291638508817824}
   m_Layer: 10
   m_Name: AshBarkModel
   m_TagString: Untagged
@@ -55,9 +53,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4943026062304988}
+  - component: {fileID: 54127167277780716}
   - component: {fileID: 135236196284948380}
   - component: {fileID: 114627878661682418}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AshBark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +83,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1969995721879348}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.959, y: 4, z: 6.171}
+  m_LocalPosition: {x: 2.31, y: 4, z: 5.864319}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4701067961518996}
@@ -147,12 +146,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1296147611092366}
   m_Mesh: {fileID: 4300000, guid: ec99d4c09b506574a83f9b3fd1611a9e, type: 3}
---- !u!54 &54820162532259536
+--- !u!54 &54127167277780716
 Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1296147611092366}
+  m_GameObject: {fileID: 1969995721879348}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -160,8 +159,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!95 &95096882346266996
 Animator:
   serializedVersion: 3
@@ -199,23 +198,11 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1969995721879348}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.15
   m_Center: {x: 0, y: 0.07, z: 0}
---- !u!135 &135291638508817824
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1296147611092366}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 5
-  m_Center: {x: 0, y: 5, z: 0}
 --- !u!135 &135968451609363906
 SphereCollider:
   m_ObjectHideFlags: 1

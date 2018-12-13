@@ -15,4 +15,5 @@ MonoBehaviour:
   stackSize: 0
   isUseable: 1
   itemObject: {fileID: 1047907499391740, guid: baa7ac252e8993f49b9fdcf7ea72650a, type: 2}
+  amountOfSlots: 3
   bagPrefab: {fileID: 1094877431357406, guid: ea49669d9fdfe1045b7957816c7e1532, type: 2}

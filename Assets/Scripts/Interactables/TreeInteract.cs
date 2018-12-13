@@ -43,7 +43,7 @@ public class TreeInteract : Interactable {
             Vector3 spawnLoc = new Vector3(transform.position.x, transform.position.y + (i * 0.1f), transform.position.z);
             barkArr[i] = Instantiate(BarkToSpawn, spawnLoc, Quaternion.Euler(0f, Random.Range(0f, 180f), 0f));
             //For all bark spawned, disable their collision with items
-            barkArr[i].GetComponentInChildren<SphereCollider>().enabled = false;
+            barkArr[i].GetComponentInChildren<Collider>().enabled = false;
             //Shoot the bark away from the tree
             Vector3 shootForce = new Vector3(Random.Range(-4.0f, 4.0f), Random.Range(10.0f, 15.0f), Random.Range(-4.0f, 4.0f));
             shootForce.Normalize();
@@ -67,7 +67,7 @@ public class TreeInteract : Interactable {
             Vector3 spawnLoc = new Vector3(transform.position.x, transform.position.y + (i * 0.1f), transform.position.z);
             logsArr[i] = Instantiate(LogToSpawn, spawnLoc, Quaternion.Euler(0f, Random.Range(0f, 180f), 0f));
             //For all logs spawned, disable their collision with items
-            logsArr[i].GetComponentInChildren<SphereCollider>().enabled = false;
+            logsArr[i].GetComponentInChildren<Collider>().enabled = false;
             //Shoot the log away from the tree
             Vector3 shootForce = new Vector3(Random.Range(-4.0f, 4.0f), Random.Range(10.0f, 15.0f), Random.Range(-4.0f, 4.0f));
             shootForce.Normalize();
@@ -84,13 +84,13 @@ public class TreeInteract : Interactable {
             //For all bark spawned, enable collision with items
             for (int i = 0; i < barkArr.Length; i++)
             {
-                barkArr[i].GetComponentInChildren<SphereCollider>().enabled = true;
+                barkArr[i].GetComponentInChildren<Collider>().enabled = true;
             }
 
             //For all logs spawned, enable collision with items
             for (int i = 0; i < logsArr.Length; i++)
             {
-                logsArr[i].GetComponentInChildren<SphereCollider>().enabled = true;
+                logsArr[i].GetComponentInChildren<Collider>().enabled = true;
             }
             //Delete this GameObject
             Destroy(this.gameObject);

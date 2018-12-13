@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Bag", menuName ="Items/Bag", order =1)]
 public class Bag : Item {
 
-
+    [SerializeField]
     private int amountOfSlots;
 
     [SerializeField]

@@ -35,6 +35,12 @@ public class GameManage : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+        //Ifthe player pos drops below 0, spawn him on 0,0,1
+        if (playerObject.transform.position.y < 0)
+        {
+            playerObject.transform.position = new Vector3(0f, 1f, 0f);
+        }
+
         //Check if inventory has been opened
         if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.B))
         {
@@ -47,7 +53,7 @@ public class GameManage : MonoBehaviour {
 
                 //Set the location of the camera a bit to the right so that the player is in view
                 Transform pivot = playerObject.GetComponent<PlayerMovement>().PivotTransform.transform;
-                //Get the distance the camera is away from the player
+                    //Get the distance the camera is away from the player
                 float currentDistance = Camera.GetComponentInChildren<CameraCollision>().Distance;           
                 pivot.position = pivot.position + pivot.right * 0.85f * currentDistance;
 
@@ -67,13 +73,14 @@ public class GameManage : MonoBehaviour {
                 playerObject.GetComponent<PlayerMovement>().enabled = true;
                 Camera.GetComponent<CollidingCamera>().IsAllowedToUpdate = true;
                 Camera.GetComponentInChildren<CameraCollision>().IsAllowedToUpdate = true;
-
+                //Get the distance the camera is away from the player
+                Transform pivot = playerObject.GetComponent<PlayerMovement>().PivotTransform.transform;
+                float currentDistance = Camera.GetComponentInChildren<CameraCollision>().Distance;
+                pivot.position = pivot.position - pivot.right * 0.85f * currentDistance;
                 UI.GetComponent<CanvasGroup>().alpha = 0.0f;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
 
-                //Reset cam pos
-                Transform pivot = playerObject.GetComponent<PlayerMovement>().PivotTransform.transform;
 
 
 
