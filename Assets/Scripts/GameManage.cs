@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManage : MonoBehaviour {
 
@@ -24,7 +25,6 @@ public class GameManage : MonoBehaviour {
             return instance;
         }
     }
-
     // Use this for initialization
     void Start() {
 
@@ -35,7 +35,9 @@ public class GameManage : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        //Ifthe player pos drops below 0, spawn him on 0,0,1
+
+
+        //If the player pos drops below 0, spawn him on 0,0,1
         if (playerObject.transform.position.y < 0)
         {
             playerObject.transform.position = new Vector3(0f, 1f, 0f);
@@ -85,6 +87,11 @@ public class GameManage : MonoBehaviour {
 
 
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }
