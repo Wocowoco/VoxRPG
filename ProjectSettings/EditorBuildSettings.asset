@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MiningTestScene.unity
     guid: 1cc843860284ba24c80cc822934f0ed0
+  - enabled: 1
+    path: Assets/Scenes/World0.1.unity
+    guid: 2f71dd704c4377242b70051370cb3ac2
   m_configObjects: {}
