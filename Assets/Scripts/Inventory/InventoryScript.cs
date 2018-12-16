@@ -9,6 +9,9 @@ public class InventoryScript : MonoBehaviour {
     [SerializeField]
     private BagSlot fixedBag;
 
+    [SerializeField]
+    private int axeTier = 0;
+
     //Make it so there's only one inventoryScript
     private static InventoryScript instance;
 
@@ -33,7 +36,18 @@ public class InventoryScript : MonoBehaviour {
         }
     }
 
+    public int InvAxeTier
+    {
+        get
+        {
+            return axeTier;
+        }
 
+        set
+        {
+            axeTier = value;
+        }
+    }
 
     [SerializeField]
     private Item[] items;
@@ -143,12 +157,14 @@ public class InventoryScript : MonoBehaviour {
 
     public bool AddItem(Item item)
     {
+  
         //If the item is stackable, try stacking it
         if (item.MyStackSize > 0)
         {
             //Check if the can be placed on the stack
             if (PlaceInStack(item))
             {
+                UpdateTiers(item, true);
                 return true;
             }
         }
@@ -156,11 +172,85 @@ public class InventoryScript : MonoBehaviour {
         //If item couldn't be placed in a stack, place it in a new slot instead
         if (PlaceInEmptySlot(item))
         {
+            UpdateTiers(item, true);
             return true;
         }
         else
         {
             return false;
+        }
+    }
+
+    public void UpdateTiers(Item item, bool isBeingAdded)
+    {
+        //If an item is being added
+        if (isBeingAdded)
+        {
+            //Update axe tiers
+            if (item is Axe)
+            {
+
+                int newAxeLevel = (item as Axe).MyAxeTier;
+
+                //If the new axe's tier is higher than the current one in the inventory, change it to that one
+                if (InvAxeTier < newAxeLevel)
+                {
+                    InvAxeTier = newAxeLevel;
+                }
+
+            }
+        }
+
+
+        //If an item is being removed
+        else
+        {
+            //Update axe tiers
+            if (item is Axe)
+            {
+                //Set axe tier to 0, for now
+                InvAxeTier = 0;
+                //Check all the slots for the highest tier axe, if any
+
+                //Check all slots in the fixed bag
+                foreach (SlotScript slot in fixedBag.MyBag.MyBagScript.MySlots)
+                {
+                    //Only compare if the item in the slot is an axe
+                    if (slot.MyItem is Axe)
+                    {
+                        int newAxeLevel = (item as Axe).MyAxeTier;
+
+                        //If the new axe's tier is higher than the current one in the inventory, change it to that one
+                        if (InvAxeTier < newAxeLevel)
+                        {
+                            Debug.Log("Found a second axe in the fixed bag");
+                            InvAxeTier = newAxeLevel;
+                        }
+                    }
+                }
+
+                //Check if there is a second bag equipped
+                if (bagSlot.MyItem != null)
+                {
+                    //Check all slots in the equiped bag
+                    foreach (SlotScript slot in bagSlot.MyBag.MyBagScript.MySlots)
+                    {
+                        //Only compare if the item in the slot is an axe
+                        if (slot.MyItem is Axe)
+                        {
+                            int newAxeLevel = (item as Axe).MyAxeTier;
+
+                            //If the new axe's tier is higher than the current one in the inventory, change it to that one
+                            if (InvAxeTier < newAxeLevel)
+                            {
+                                Debug.Log("Found a second axe in the equipable bag");
+                                InvAxeTier = newAxeLevel;
+                            }
+                        }
+                    }
+                }
+
+            }
         }
     }
 

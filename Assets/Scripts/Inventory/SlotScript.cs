@@ -82,6 +82,8 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler
                 icon.color = new Color(0, 0, 0, 0);
                 StackSize.text = "";
 
+                //Update tool tiers when removing item
+                InventoryScript.MyInstance.UpdateTiers(item, false);
             }
 
         }
