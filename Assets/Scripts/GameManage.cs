@@ -7,7 +7,7 @@ public class GameManage : MonoBehaviour {
 
     public GameObject playerObject;
     public GameObject UI;
-    public GameObject Camera;
+    public GameObject CameraObject;
 
 
     //Make it so there's only one inventoryScript
@@ -46,6 +46,9 @@ public class GameManage : MonoBehaviour {
         //Check if inventory has been opened
         if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.B))
         {
+            //-------------
+            //SHOWING UI
+            //-------------
             //If the screen is hidden, unhide it
             if (Cursor.lockState == CursorLockMode.Locked)
             {
@@ -54,31 +57,35 @@ public class GameManage : MonoBehaviour {
                 Cursor.lockState = CursorLockMode.None;
 
                 //Set the location of the camera a bit to the right so that the player is in view
-                Transform pivot = playerObject.GetComponent<PlayerMovement>().PivotTransform.transform;
-                    //Get the distance the camera is away from the player
-                float currentDistance = Camera.GetComponentInChildren<CameraCollision>().Distance;           
-                pivot.position = pivot.position + pivot.right * 0.85f * currentDistance;
+                //Transform pivot = playerObject.GetComponent<PlayerMovement>().PivotTransform.transform;
+                //Get the distance the camera is away from the player
+                //float currentDistance = Camera.GetComponentInChildren<CameraCollision>().Distance;           
+                //pivot.position = pivot.position + pivot.right * 0.85f * currentDistance;
+                CameraObject.GetComponentInChildren<Camera>().rect = new Rect(0, 0, 0.5f, 1);
 
                 //Disable the player form moving and using camera
-                Camera.GetComponent<CollidingCamera>().IsAllowedToUpdate = false;
+                CameraObject.GetComponent<CollidingCamera>().IsAllowedToUpdate = false;
                 playerObject.GetComponent<PlayerMovement>().enabled = false;
-                Camera.GetComponentInChildren<CameraCollision>().IsAllowedToUpdate = false;
+                CameraObject.GetComponentInChildren<CameraCollision>().IsAllowedToUpdate = false;
 
 
             }
-
+            //-----------
+            //HIDE UI
+            //-----------
             //If the screen is shown, hide it
             else if (Cursor.lockState == CursorLockMode.None)
             {
 
                 //Allow the player to move again and use the camera  
                 playerObject.GetComponent<PlayerMovement>().enabled = true;
-                Camera.GetComponent<CollidingCamera>().IsAllowedToUpdate = true;
-                Camera.GetComponentInChildren<CameraCollision>().IsAllowedToUpdate = true;
+                CameraObject.GetComponent<CollidingCamera>().IsAllowedToUpdate = true;
+                CameraObject.GetComponentInChildren<CameraCollision>().IsAllowedToUpdate = true;
                 //Get the distance the camera is away from the player
-                Transform pivot = playerObject.GetComponent<PlayerMovement>().PivotTransform.transform;
-                float currentDistance = Camera.GetComponentInChildren<CameraCollision>().Distance;
-                pivot.position = pivot.position - pivot.right * 0.85f * currentDistance;
+                //Transform pivot = playerObject.GetComponent<PlayerMovement>().PivotTransform.transform;
+                //float currentDistance = Camera.GetComponentInChildren<CameraCollision>().Distance;
+                //pivot.position = pivot.position - pivot.right * 0.85f * currentDistance;
+                CameraObject.GetComponentInChildren<Camera>().rect = new Rect(0, 0, 1, 1);
                 UI.GetComponent<CanvasGroup>().alpha = 0.0f;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;

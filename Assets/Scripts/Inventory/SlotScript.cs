@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SlotScript : MonoBehaviour, IPointerClickHandler
+public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 {
     protected Stack<Item> items = new Stack<Item>();
 
@@ -136,6 +136,16 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        //Check if leftclick
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+
+        }
+
+    }
+
 
     public bool StackItem(Item item)
     {
@@ -151,4 +161,6 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler
         //If failed, return false
         return false;
     }
+
+
 }
