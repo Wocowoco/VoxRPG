@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManage : MonoBehaviour {
 
     public GameObject playerObject;
-    public GameObject UI;
+    public GameObject InventoryScreenObject;
     public GameObject CameraObject;
 
 
@@ -35,8 +36,6 @@ public class GameManage : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-
-
         //If the player pos drops below 0, spawn him on 0,0,1
         if (playerObject.transform.position.y < 0)
         {
@@ -52,7 +51,7 @@ public class GameManage : MonoBehaviour {
             //If the screen is hidden, unhide it
             if (Cursor.lockState == CursorLockMode.Locked)
             {
-                UI.GetComponent<CanvasGroup>().alpha = 1.0f;
+                InventoryScreenObject.GetComponent<CanvasGroup>().alpha = 1;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
 
@@ -65,7 +64,7 @@ public class GameManage : MonoBehaviour {
 
                 //Disable the player form moving and using camera
                 CameraObject.GetComponent<CollidingCamera>().IsAllowedToUpdate = false;
-                playerObject.GetComponent<PlayerMovement>().enabled = false;
+                playerObject.GetComponent<PlayerMovement>().IsAllowedToUpdate = false;
                 CameraObject.GetComponentInChildren<CameraCollision>().IsAllowedToUpdate = false;
 
 
@@ -78,7 +77,7 @@ public class GameManage : MonoBehaviour {
             {
 
                 //Allow the player to move again and use the camera  
-                playerObject.GetComponent<PlayerMovement>().enabled = true;
+                playerObject.GetComponent<PlayerMovement>().IsAllowedToUpdate = true;
                 CameraObject.GetComponent<CollidingCamera>().IsAllowedToUpdate = true;
                 CameraObject.GetComponentInChildren<CameraCollision>().IsAllowedToUpdate = true;
                 //Get the distance the camera is away from the player
@@ -86,11 +85,9 @@ public class GameManage : MonoBehaviour {
                 //float currentDistance = Camera.GetComponentInChildren<CameraCollision>().Distance;
                 //pivot.position = pivot.position - pivot.right * 0.85f * currentDistance;
                 CameraObject.GetComponentInChildren<Camera>().rect = new Rect(0, 0, 1, 1);
-                UI.GetComponent<CanvasGroup>().alpha = 0.0f;
+                InventoryScreenObject.GetComponent<CanvasGroup>().alpha = 0;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
-
-
 
 
             }

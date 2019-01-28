@@ -33,6 +33,25 @@ public class BagSlot : SlotScript {
         }
     }
 
+    override public void OnPointerClick(PointerEventData eventData)
+    {
+        //Checking EventData
+
+        //Check if leftclick
+        if (eventData.button == PointerEventData.InputButton.Left)
+            //If double leftclick
+            if (eventData.clickCount >= 2)
+            {
+                UseItem();
+            }
+
+        //Check if rightclick
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            UseItem();
+        }
+    }
+
     override public void UseItem()
     {
         //If the slot is not empty
