@@ -155,9 +155,9 @@ public class InventoryScript : MonoBehaviour {
         return false;
     }
 
+    //Try adding an item to the inventory
     public bool AddItem(Item item)
     {
-  
         //If the item is stackable, try stacking it
         if (item.MyStackSize > 0)
         {
@@ -179,6 +179,24 @@ public class InventoryScript : MonoBehaviour {
         {
             return false;
         }
+    }
+
+    //Try to remove bag from bagslot
+    public bool RemoveBagFromBagSlot(Bag bag)
+    {
+        //Check all slots in the fixed bag
+        foreach (SlotScript slot in fixedBag.MyBag.MyBagScript.MySlots)
+        {
+            //Try to add an item to the fixed bag
+            if (fixedBag.MyBag.MyBagScript.AddItem(bag))
+            {
+                //Succesfully added item in new slot
+                return true;
+            }
+        }
+
+        //If failed to place equipped bag in the default bag, don't delete bags
+        return false;
     }
 
     public void UpdateTiers(Item item, bool isBeingAdded)

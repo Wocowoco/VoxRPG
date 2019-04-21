@@ -39,11 +39,13 @@ public class BagSlot : SlotScript {
 
         //Check if leftclick
         if (eventData.button == PointerEventData.InputButton.Left)
+        {
             //If double leftclick
             if (eventData.clickCount >= 2)
             {
                 UseItem();
             }
+        }
 
         //Check if rightclick
         if (eventData.button == PointerEventData.InputButton.Right)
@@ -57,9 +59,12 @@ public class BagSlot : SlotScript {
         //If the slot is not empty
         if (!IsEmpty)
         {
-            InventoryScript.MyInstance.AddItem(MyItem);
-            MyBag.MyBagScript.RemoveBag();
-            RemoveItem(MyBag);
+            //If the bag can be added to the inventory, delete it, otherwise keep it.
+            if (InventoryScript.MyInstance.RemoveBagFromBagSlot(MyBag))
+            {
+                MyBag.MyBagScript.RemoveBag();
+                RemoveItem(MyBag);
+            }
         }
     }
 }

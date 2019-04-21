@@ -99,6 +99,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerDownHandl
             GameObject droppedItem = Instantiate(MyItem.MyItemObject, new Vector3(spawnLoc.x, spawnLoc.y + 0.2f, spawnLoc.z), Quaternion.Euler(0f, 0f, 0f));
             Vector3 dropDirection = new Vector3(playerTransform.forward.x + Random.Range(-0.1f, 0.1f), playerTransform.forward.y + Random.Range(-0.1f, 0.1f), playerTransform.forward.z + Random.Range(-0.1f, 0.1f));
             droppedItem.GetComponent<Rigidbody>().AddForce(dropDirection * 350.0f);
+            
             //Remove one of the items
             RemoveItem(item);
         }
@@ -123,11 +124,13 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerDownHandl
 
         //Check if leftclick
         if (eventData.button == PointerEventData.InputButton.Left)
+        {
             //If double leftclick
             if (eventData.clickCount >= 2)
             {
-                    UseItem();
+                UseItem();
             }
+        }
 
         //Check if rightclick
         if (eventData.button == PointerEventData.InputButton.Right)
