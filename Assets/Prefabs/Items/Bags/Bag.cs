@@ -32,7 +32,7 @@ public class Bag : Item {
 
     override public void Use()
     {
-        //Check if there the bag slot is still empty before adding it
+        //Check if the bag slot is still empty before adding it
         if (InventoryScript.MyInstance.MyBagSlot.MyBag == null)
         {
             MyBagScript = Instantiate(bagPrefab, InventoryScript.MyInstance.transform).GetComponent<BagScript>();

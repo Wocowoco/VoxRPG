@@ -182,20 +182,31 @@ public class InventoryScript : MonoBehaviour {
     }
 
     //Try to remove bag from bagslot
-    public bool RemoveBagFromBagSlot(Bag bag)
+    public bool RemoveBagFromBagSlot(Bag oldBag, int amountOfNewSlots)
     {
+        //If the new bag has fewer slots than the old bag, make sure the bag is empty
+        if(oldBag.AmountOfSlots > amountOfNewSlots)
+        {
+            //Check if the old bag is empty (should return true when empty, so invert)
+            if(!oldBag.MyBagScript.CheckIfBagIsEmpty())
+            {
+                //The bag isn't empty, so it shouldn't be removed to prevent loss of items.
+                return false;
+            }
+        }
         //Check all slots in the fixed bag
         foreach (SlotScript slot in fixedBag.MyBag.MyBagScript.MySlots)
         {
-            //Try to add an item to the fixed bag
-            if (fixedBag.MyBag.MyBagScript.AddItem(bag))
+            //Try to add the bag in the default bag
+            if (fixedBag.MyBag.MyBagScript.AddItem(oldBag))
             {
-                //Succesfully added item in new slot
+                //Succesfully added bag in empty fixed slot
                 return true;
             }
+
         }
 
-        //If failed to place equipped bag in the default bag, don't delete bags
+        //It failed to place equipped bag in the default bag, don't delete bags
         return false;
     }
 

@@ -45,6 +45,23 @@ public class BagScript : MonoBehaviour {
 
     }
 
+    public bool CheckIfBagIsEmpty()
+    {
+        //Check all the slots of the bag
+        foreach (SlotScript slot in slotList)
+        {
+            //Check if the slot is empty
+            if (!slot.IsEmpty)
+            {
+                //If slot is not empty, the bag is not empty
+                return false;
+            }
+        }
+
+        //All slots were empty, so the bag was empty
+        return true;
+    }
+
     public void RemoveBag()
     {
         Destroy(this.gameObject);

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class BagSlot : SlotScript {
 
     private Bag bag;
-
     public Bag MyBag
     {
         get
@@ -56,11 +55,11 @@ public class BagSlot : SlotScript {
 
     override public void UseItem()
     {
-        //If the slot is not empty
+        //If the bagslot is not empty
         if (!IsEmpty)
         {
-            //If the bag can be added to the inventory, delete it, otherwise keep it.
-            if (InventoryScript.MyInstance.RemoveBagFromBagSlot(MyBag))
+            //If the bag can be added to the inventory, remove it, otherwise keep it equipped.
+            if (InventoryScript.MyInstance.RemoveBagFromBagSlot(MyBag, 0))
             {
                 MyBag.MyBagScript.RemoveBag();
                 RemoveItem(MyBag);
