@@ -66,6 +66,8 @@ public class GameManage : MonoBehaviour {
                 CameraObject.GetComponent<CollidingCamera>().IsAllowedToUpdate = false;
                 playerObject.GetComponent<PlayerMovement>().IsAllowedToUpdate = false;
                 CameraObject.GetComponentInChildren<CameraCollision>().IsAllowedToUpdate = false;
+                playerObject.GetComponentInChildren<PlayerAction>().IsAllowedToUpdate = false;
+
 
 
             }
@@ -78,6 +80,7 @@ public class GameManage : MonoBehaviour {
 
                 //Allow the player to move again and use the camera  
                 playerObject.GetComponent<PlayerMovement>().IsAllowedToUpdate = true;
+                playerObject.GetComponentInChildren<PlayerAction>().IsAllowedToUpdate = true;
                 CameraObject.GetComponent<CollidingCamera>().IsAllowedToUpdate = true;
                 CameraObject.GetComponentInChildren<CameraCollision>().IsAllowedToUpdate = true;
                 //Get the distance the camera is away from the player
