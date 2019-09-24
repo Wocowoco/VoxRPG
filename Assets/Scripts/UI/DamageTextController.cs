@@ -5,8 +5,8 @@ using UnityEngine;
 public class DamageTextController : MonoBehaviour {
 
     private static DamageText damageTextPrefab;
+    private static DamageText critTextPrefab;
     private static GameObject ui;
-    private static GameObject hitObject;
     private static DamageText instance;
 
     public static void Initialize()
@@ -14,23 +14,33 @@ public class DamageTextController : MonoBehaviour {
         if (!damageTextPrefab)
         {
             damageTextPrefab = Resources.Load<DamageText>("UI/DamageTextNode");
+            critTextPrefab = Resources.Load<DamageText>("UI/CritTextNode");
         }
         ui = GameObject.Find("UI");
     }
 
     public static void CreateDamageText(string amountOfDamage, GameObject enemy)
     {
-        hitObject = enemy;
-        
         //Create a new blanc damagetext
         instance = Instantiate(damageTextPrefab);
-        instance.Enemy = enemy;
+        instance.EnemyPos = enemy.transform;
 
         //Add it to the UI
         instance.transform.SetParent(ui.transform, false);
-        //Get the location it should be printed on the screen
-        Vector2 screenPos = Camera.main.WorldToScreenPoint(hitObject.transform.position);
-        instance.transform.position = screenPos;
+
+        //Make it show the correct damage amount
+        instance.SetDamageText(amountOfDamage);
+    }
+
+
+    public static void CreateCritText(string amountOfDamage, GameObject enemy)
+    {
+        //Create a new blanc damagetext
+        instance = Instantiate(critTextPrefab);
+        instance.EnemyPos = enemy.transform;
+
+        //Add it to the UI
+        instance.transform.SetParent(ui.transform, false);
 
         //Make it show the correct damage amount
         instance.SetDamageText(amountOfDamage);

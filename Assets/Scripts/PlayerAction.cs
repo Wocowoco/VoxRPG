@@ -76,17 +76,46 @@ public class PlayerAction : MonoBehaviour {
             {
                 //Player just attacked, make it go on cooldown
                 isReadyToAttack = false;
-
-
+      
                 //CODE TO CHECK FOR EQUIPPED WEAPON
 
+                //-----//
+                //PUNCH//
+                //-----//
+                //If no weapon equipped, do a melee swing (punch)
                 //Turn player to face towards where he is aiming
                 gameManager.FacePlayerTowardsAim(0.75f);
-
-                //If no weapon equipped, do a melee swing (punch)
                 attackCollider = Physics.OverlapBox(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), new Vector3(1,1,1));
+                //Deal damage to all enemies hit
+                int targetHit = 0;
+                while (targetHit < attackCollider.Length)
+                {
+                    //Calculate Damage
+                    
+                    if (attackCollider[targetHit].GetComponent<Enemy>() != null)
+                    {
+                        //Punch damage
+                        int damage = CalculatePlayerDamage(1,2);
+
+                        //Check if the player crits
+                        float critChance = PlayerStats.MyInstance.GetCritChance();
+                        float critCheck = Random.Range(0.0f, 100.0f);
+                        //If check is below critChance, than the player scored a crital hit
+                        if (critCheck < critChance)
+                        {
+                            attackCollider[targetHit].GetComponent<Enemy>().TakeDamage(damage, true);
+                        }
+                        else //Not a crit
+                        {
+                            attackCollider[targetHit].GetComponent<Enemy>().TakeDamage(damage);
+                        }
+                    }
+                    targetHit++;
+                }
+
+
                 //Set animation to punching if standing still, else set animation to walking punch
-                if(GetComponentInParent<PlayerMovement>().PlayerAnimations.GetFloat("Speed") <= 0.1f)
+                if (GetComponentInParent<PlayerMovement>().PlayerAnimations.GetFloat("Speed") <= 0.1f)
                 {
                     GetComponentInParent<PlayerMovement>().PlayerAnimations.Play("Player_Punch");
                 }
@@ -95,35 +124,36 @@ public class PlayerAction : MonoBehaviour {
                     GetComponentInParent<PlayerMovement>().PlayerAnimations.Play("Player_WalkingPunch");
                 }
                
-                //Deal damage to all enemies hit
-                int targetHit = 0;
-                while (targetHit < attackCollider.Length)
-                {
-                    if (attackCollider[targetHit].GetComponent<Enemy>() != null)
-                    {
-                        Debug.Log("Dealt damage to an enemy.");
-                        attackCollider[targetHit].GetComponent<Enemy>().TakeDamage(1);
-                    }
-
-                    targetHit++;
-                }
+                
             }
         }
     }
 
-    //void OnTriggerStay(Collider otherObject)
-    //{
-    //    //Check if the collided Object has a Interactible script
-    //    if (otherObject.GetComponent<Interactable>() != null)
-    //   {
+    private int CalculatePlayerDamage(int lowerAmount, int upperAmount = 0)
+    {
+        int minDmg = lowerAmount;
+        int maxDmg = upperAmount;
 
-    //        //If the action button is pressed, check if there are any interactibles nearby if not in the air
-    //        if (Input.GetKeyDown(KeyCode.F) && this.transform.parent.GetComponent<CharacterController>().isGrounded)
-    //        {
-    //            Debug.Log("Spotted " + otherObject.name);
-    //            //Run whatever interacting with the object would do
-    //            otherObject.GetComponent<Interactable>().OnInteract();
-    //        }
-    //    }
-    //}
+        //Modify damage with player's stats
+        int str = PlayerStats.MyInstance.GetStrength();
+
+        if (upperAmount != 0) //There is a upper and lower limit to this attack
+        {
+            //Calc max dmg
+            maxDmg += (int)((1.0f / 1.875f) * str + (Mathf.Pow(str, 2.0f)) * (1.0f/2375.0f));
+
+            //Calc min dmg
+            minDmg += (int)((1.0f / 2.25f) * str + (Mathf.Pow(str, 2.0f)) * (1.0f / 2375.0f));
+
+            //Debug.Log("Min DMG: " + minDmg + ", Max DMG: " + maxDmg);
+        }
+        else //This attack deals fixed damage
+        {
+            return minDmg += (int)((1.0f / 1.875f) * str + (Mathf.Pow(str, 2.0f)) * (1.0f / 2375.0f));
+        }
+
+        //Return a random damage number between min and max damage.
+        return (int) Random.Range(minDmg,maxDmg+1);
+
+    }
 }

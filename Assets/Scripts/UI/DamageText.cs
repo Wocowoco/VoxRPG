@@ -7,13 +7,19 @@ public class DamageText : MonoBehaviour {
 
     public Animator DamageTextAnimator;
     private Text damageText;
-    private GameObject enemy;
+    private float posX, posY, posZ;
 
-    public GameObject Enemy
+    private float randX = 0.0f;
+    private float randY = 0.0f;
+    private float randZ = 0.0f;
+
+    public Transform EnemyPos
     {
         set
         {
-            enemy = value;
+            posX = value.position.x;
+            posY = value.position.y;
+            posZ = value.position.z;
         }
     }
 
@@ -25,13 +31,17 @@ public class DamageText : MonoBehaviour {
 
         //Get the text from the child (damage number to be shown)
         damageText = DamageTextAnimator.GetComponent<Text>();
+
+        //Get random pos for the damage number
+        randX = Random.Range(-0.25f, 0.25f);
+        randY = Random.Range(-0.25f, 0.25f);
+        randZ = Random.Range(-0.25f, 0.25f);
     }
 
     private void Update()
     {
-        Debug.Log("Updating number");
         //Get the location it should be printed on the screen
-        Vector2 screenPos = Camera.main.WorldToScreenPoint(enemy.transform.position);
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(new Vector3(posX + randX, posY+ randY + 0.5f , posZ + randZ));
         transform.position = screenPos;
     }
 

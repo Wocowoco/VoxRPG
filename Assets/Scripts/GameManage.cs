@@ -15,7 +15,7 @@ public class GameManage : MonoBehaviour {
     private float aimLockedTotal = 0.0f;
 
 
-    //Make it so there's only one inventoryScript
+    //Make it so there's only one GameManage
     private static GameManage instance;
 
     public static GameManage MyInstance
@@ -41,7 +41,7 @@ public class GameManage : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void LateUpdate() {
+    void Update() {
 
         //If the player pos drops below 0, spawn him on 0,0,1
         if (playerObject.transform.position.y < 0)
@@ -108,6 +108,11 @@ public class GameManage : MonoBehaviour {
             SceneManager.LoadScene(0);
         }
 
+        
+    }
+
+    private void LateUpdate()
+    {
         //When the player is aimlocked, it needs to keep looking at the camera directed for a set amount of time;
         if (isAimLocked)
         {
