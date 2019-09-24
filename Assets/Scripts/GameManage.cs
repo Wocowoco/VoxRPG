@@ -10,6 +10,10 @@ public class GameManage : MonoBehaviour {
     public GameObject InventoryScreenObject;
     public GameObject CameraObject;
 
+    private bool isAimLocked = false;
+    private float aimLockedTime = 0.0f;
+    private float aimLockedTotal = 0.0f;
+
 
     //Make it so there's only one inventoryScript
     private static GameManage instance;
@@ -31,10 +35,13 @@ public class GameManage : MonoBehaviour {
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        //Start the controllers
+        DamageTextController.Initialize();
     }
 
     // Update is called once per frame
-    void Update() {
+    void LateUpdate() {
 
         //If the player pos drops below 0, spawn him on 0,0,1
         if (playerObject.transform.position.y < 0)
@@ -100,5 +107,32 @@ public class GameManage : MonoBehaviour {
         {
             SceneManager.LoadScene(0);
         }
+
+        //When the player is aimlocked, it needs to keep looking at the camera directed for a set amount of time;
+        if (isAimLocked)
+        {
+            //Add frametime to locked time
+            aimLockedTime += Time.deltaTime;
+
+            //Keep looking at camera
+            playerObject.transform.GetChild(0).gameObject.transform.rotation = Quaternion.Slerp(playerObject.transform.GetChild(0).gameObject.transform.rotation, new Quaternion(0, CameraObject.transform.rotation.y, 0, CameraObject.transform.rotation.w), 75 * Time.deltaTime);
+            //As long as the time is less than aimlocked time, keep it locked
+            if (aimLockedTime >= aimLockedTotal)
+            {
+                isAimLocked = false;
+                aimLockedTotal = 0.0f;
+                aimLockedTime = 0.0f;
+            }
+        }
     }
+
+    public void FacePlayerTowardsAim(float timeToKeepLooking)
+    {
+        //Make sure to update the child rotation, since that one changes depending on where the player is moving
+        playerObject.transform.GetChild(0).gameObject.transform.rotation = Quaternion.Slerp(playerObject.transform.GetChild(0).gameObject.transform.rotation, new Quaternion(0,CameraObject.transform.rotation.y,0, CameraObject.transform.rotation.w), 75 * Time.deltaTime);
+        isAimLocked = true;
+        aimLockedTotal = timeToKeepLooking;
+    }
+
+
 }

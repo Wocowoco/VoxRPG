@@ -22,7 +22,7 @@ public class CameraCollision : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (IsAllowedToUpdate)
         {

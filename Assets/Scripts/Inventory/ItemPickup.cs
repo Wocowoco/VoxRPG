@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemPickup : MonoBehaviour {
-
-    private GameManage gameManager;
     [SerializeField]
     private Item item;
 
 	// Use this for initialization
 	void Start () {
-        gameManager = GameManage.MyInstance;
 	}
 	
 	// Update is called once per frame
