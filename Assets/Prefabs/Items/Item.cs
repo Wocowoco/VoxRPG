@@ -73,7 +73,7 @@ public class Item : ScriptableObject {
 
     public void Remove()
     {
-        //If the items is in a slot, remove it from that slot
+        //If the item is in a slot, remove it from that slot
         if (MySlot != null)
         {
             MySlot.RemoveItem(this);

@@ -7,6 +7,8 @@ public class InventoryScript : MonoBehaviour {
     [SerializeField]
     private BagSlot bagSlot;
     [SerializeField]
+    private WeaponSlot weaponSlot;
+    [SerializeField]
     private BagSlot fixedBag;
 
     [SerializeField]
@@ -33,6 +35,14 @@ public class InventoryScript : MonoBehaviour {
         get
         {
             return bagSlot;
+        }
+    }
+
+    public WeaponSlot MyWeaponSlot
+    {
+        get
+        {
+            return weaponSlot;
         }
     }
 
@@ -88,6 +98,15 @@ public class InventoryScript : MonoBehaviour {
         if (bagSlot.MyItem == null)
         {
             bagSlot.AddItem(bag);
+        }
+    }
+
+    public void AddWeapon(Weapon weapon)
+    {
+        //If there's no weapon equipped yet, equip one
+        if (weaponSlot.MyItem == null)
+        {
+            weaponSlot.AddItem(weapon);
         }
     }
 
@@ -210,6 +229,42 @@ public class InventoryScript : MonoBehaviour {
         return false;
     }
 
+    public bool RemoveWeaponFromWeaponSlot(Weapon weapon)
+    {
+        //Try to put the weapon back in your bags
+        //Check all slots in the fixed bag
+        foreach (SlotScript slot in fixedBag.MyBag.MyBagScript.MySlots)
+        {
+            //Try to add the bag in the default bag
+            if (fixedBag.MyBag.MyBagScript.AddItem(weapon))
+            {
+                //Succesfully added bag in empty fixed slot
+                MyWeaponSlot.RemoveItem(weapon);
+                return true;
+            }
+
+        }
+
+
+        //Check all slots in the equipped bag, if one is equipped
+        if (bagSlot.MyItem != null)
+        {
+            //Check all slots in the equiped bag
+            foreach (SlotScript slot in bagSlot.MyBag.MyBagScript.MySlots)
+            {
+                //Try to add an item to the second bag
+                if (bagSlot.MyBag.MyBagScript.AddItem(weapon))
+                {
+                    //Succesfully added item in new slot
+                    MyWeaponSlot.RemoveItem(weapon);
+                    return true;
+                }
+            }
+        }
+
+        //There is no room in the bags for the weapon, failed to remove weapon
+        return false;
+    }
     public void UpdateTiers(Item item, bool isBeingAdded)
     {
         //If an item is being added

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Axe", menuName = "Items/Axe", order = 1)]
-public class Axe : Item {
+public class Axe : Weapon {
 
     [SerializeField]
     private int axeTier = 0;

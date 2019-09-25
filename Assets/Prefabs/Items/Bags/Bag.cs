@@ -38,8 +38,6 @@ public class Bag : Item {
             MyBagScript = Instantiate(bagPrefab, InventoryScript.MyInstance.transform).GetComponent<BagScript>();
             MyBagScript.AddSlots(amountOfSlots);
 
-
-
             //Remove item from inventory
             Remove();
 

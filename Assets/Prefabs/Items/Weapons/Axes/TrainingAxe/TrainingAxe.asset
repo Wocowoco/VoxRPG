@@ -15,4 +15,9 @@ MonoBehaviour:
   stackSize: 0
   isUseable: 1
   itemObject: {fileID: 1101617421564688, guid: da923a9403d098247b9309ed35ca0a3b, type: 2}
+  minimumDamage: 2
+  maximumDamage: 5
+  damageType: 0
+  attackSpeed: 2
+  strength: 0
   axeTier: 1

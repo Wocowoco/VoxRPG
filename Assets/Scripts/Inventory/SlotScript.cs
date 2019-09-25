@@ -42,7 +42,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerDownHandl
         }
     }
 
-    public bool AddItem(Item item)
+    virtual public bool AddItem(Item item)
     {
         //Add item
         items.Push(item);

@@ -29,26 +29,25 @@ public class PlayerStats : MonoBehaviour {
 
     //Offensive stats
     [SerializeField]
-    private int strength = 1000;
+    private int strength = 0;
     private int dexterity = 0;
     private int intelligence = 0;
 
-    private int firedmg = 0;
-    private int waterdmg = 0;
-    private int earthdmg = 0;
-    private int airdmg = 0;
+    private int nrmldmg = 100;
+    private int firedmg = 100;
+    private int waterdmg = 100;
+    private int earthdmg = 100;
+    private int airdmg = 100;
 
     private float critChance = 25.0f;
     private float critModifier = 1.50f;
 
-    //Defensive stats
-    private int defence = 0;
-    private int magicdef = 0;
-
-    private int firedef = 0;
-    private int waterdef = 0;
-    private int earthdef = 0;
-    private int airdef = 0;
+    //Defensive stats 
+    private int def = 100;
+    private int firedef = 100;
+    private int waterdef = 100;
+    private int earthdef = 100;
+    private int airdef = 100;
 
 
     public float GetCritChance()
@@ -64,6 +63,43 @@ public class PlayerStats : MonoBehaviour {
     public int GetStrength()
     {
         return strength;
+    }
+
+    public void AddToPlayerStats(Item item)
+    {
+        //Check if the added item is a weapon
+        if (item is Weapon)
+        {
+            strength += (item as Weapon).Strength;
+        }
+    }
+
+    public void RemoveFromPlayerStats(Item item)
+    {
+        //Check if the added item is a weapon
+        if (item is Weapon)
+        {
+            strength -= (item as Weapon).Strength;
+        }
+    }
+
+    public float GetDamageBonus(DamageType.Type damageType)
+    {
+        switch (damageType)
+        {
+            case DamageType.Type.normal:
+                return (nrmldmg/100.0f);
+            case DamageType.Type.fire:
+                return (firedmg / 100.0f);
+            case DamageType.Type.water:
+                return (waterdmg / 100.0f);
+            case DamageType.Type.earth:
+                return (earthdmg / 100.0f);
+            case DamageType.Type.air:
+                return (airdmg / 100.0f);
+            default:
+                return 1.0f;
+        }
     }
 
 }
