@@ -16,4 +16,9 @@ public class Axe : Weapon {
         }
     }
 
+    public void OnEnable()
+    {
+        attackSpeed = 1.15f;
+    }
+
 }

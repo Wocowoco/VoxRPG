@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Item", menuName = "Items/Weapon", order = 1)]
 public class Weapon : Item
 {
+    [SerializeField]
+    private GameObject handObjectPlacement;
+
     [Header("Weapon Properties")]
     [SerializeField]
     private int minimumDamage = 0;
@@ -12,8 +15,7 @@ public class Weapon : Item
     private int maximumDamage = 0;
     [SerializeField]
     private DamageType.Type damageType;
-    [SerializeField]
-    private float attackSpeed = 0;
+    protected float attackSpeed = 0;
 
     [Header("Weapon Stats")]
     [SerializeField]
@@ -59,6 +61,14 @@ public class Weapon : Item
         }
     }
 
+    public GameObject HandObject
+    {
+        get
+        {
+            return handObjectPlacement;
+        }
+    }
+
 
 
     override public void Use()
@@ -71,6 +81,8 @@ public class Weapon : Item
 
             //Tell the Inventory that we are equipping it in the weapon slot
             InventoryScript.MyInstance.AddWeapon(this);
+            //Update tiers
+            InventoryScript.MyInstance.UpdateTiers(this, true);
 
         }
         else //There is already a weapon equipped, try to swap it
@@ -85,6 +97,10 @@ public class Weapon : Item
 
             slot.RemoveItem(newWeapon);
             slot.AddItem(oldWeapon);
+
+            //Update tiers
+            InventoryScript.MyInstance.UpdateTiers(newWeapon, true);
+            InventoryScript.MyInstance.UpdateTiers(oldWeapon, true);
         }
     }
 }

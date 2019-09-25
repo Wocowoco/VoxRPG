@@ -265,6 +265,7 @@ public class InventoryScript : MonoBehaviour {
         //There is no room in the bags for the weapon, failed to remove weapon
         return false;
     }
+
     public void UpdateTiers(Item item, bool isBeingAdded)
     {
         //If an item is being added
@@ -302,12 +303,11 @@ public class InventoryScript : MonoBehaviour {
                     //Only compare if the item in the slot is an axe
                     if (slot.MyItem is Axe)
                     {
-                        int newAxeLevel = (item as Axe).MyAxeTier;
+                        int newAxeLevel = (slot.MyItem as Axe).MyAxeTier;
 
                         //If the new axe's tier is higher than the current one in the inventory, change it to that one
                         if (InvAxeTier < newAxeLevel)
                         {
-                            Debug.Log("Found a second axe in the fixed bag");
                             InvAxeTier = newAxeLevel;
                         }
                     }
@@ -322,20 +322,33 @@ public class InventoryScript : MonoBehaviour {
                         //Only compare if the item in the slot is an axe
                         if (slot.MyItem is Axe)
                         {
-                            int newAxeLevel = (item as Axe).MyAxeTier;
+                            int newAxeLevel = (slot.MyItem as Axe).MyAxeTier;
 
                             //If the new axe's tier is higher than the current one in the inventory, change it to that one
                             if (InvAxeTier < newAxeLevel)
                             {
-                                Debug.Log("Found a second axe in the equipable bag");
                                 InvAxeTier = newAxeLevel;
                             }
                         }
                     }
                 }
 
+                //Check the weapon slot
+                if (InventoryScript.MyInstance.MyWeaponSlot.MyWeapon is Axe)
+                {
+                    int newAxeLevel = (InventoryScript.MyInstance.MyWeaponSlot.MyWeapon as Axe).MyAxeTier;
+
+                    //If the new axe's tier is higher than the current one in the inventory, change it to that one
+                    if (InvAxeTier < newAxeLevel)
+                    {
+                        InvAxeTier = newAxeLevel;
+                    }
+                }
+
             }
         }
+
+        Debug.Log("Axe Tier: " + InvAxeTier);
     }
 
 }

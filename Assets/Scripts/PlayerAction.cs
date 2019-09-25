@@ -49,10 +49,11 @@ public class PlayerAction : MonoBehaviour {
             //  USE ACTION  //
             //--------------//
             //If the player is on the ground and presses F (use)
-            if (Input.GetKeyDown(KeyCode.F) && this.transform.parent.GetComponent<CharacterController>().isGrounded)
+            if (Input.GetKeyDown(KeyCode.F) && GetComponent<CharacterController>().isGrounded)
             {
-                hitCollider = Physics.OverlapSphere(transform.position, 0.5f);
-
+                //Get area to look if it hit
+                Transform hitZone = GameObject.Find("ActionZone").transform;
+                hitCollider = Physics.OverlapBox(hitZone.position, new Vector3(0.4f, 0.5f, 0.375f), hitZone.rotation);
                 int length = 0;
                 while (length < hitCollider.Length)
                 {
@@ -63,7 +64,6 @@ public class PlayerAction : MonoBehaviour {
                         hitCollider[length].GetComponent<Interactable>().OnInteract();
                         break;
                     }
-
                     length++;
                 }
             }
@@ -82,6 +82,7 @@ public class PlayerAction : MonoBehaviour {
                 //--------------------//
                 if (InventoryScript.MyInstance.MyWeaponSlot.MyWeapon != null)
                 {
+                    //
                     //Make the attack go on cooldown for the weapon attack speed
                     attackCooldDown = InventoryScript.MyInstance.MyWeaponSlot.MyWeapon.AttackSpeed;
                     //Turn player to face towards where he is aiming, lock it for the duration of the attack
@@ -93,8 +94,6 @@ public class PlayerAction : MonoBehaviour {
                     int targetHit = 0;
                     while (targetHit < attackCollider.Length)
                     {
-                        //Calculate Damage
-
                         if (attackCollider[targetHit].GetComponent<Enemy>() != null)
                         {
                             //Weapon damage
@@ -118,6 +117,12 @@ public class PlayerAction : MonoBehaviour {
                         }
                         targetHit++;
                     }
+
+                    //Do the correct animation
+                    if (InventoryScript.MyInstance.MyWeaponSlot.MyWeapon is Axe)
+                    {
+                        GetComponentInParent<PlayerMovement>().PlayerAnimations.Play("Player_AxeSwing");
+                    }
                 }
                 //-----//
                 //PUNCH//
@@ -129,7 +134,7 @@ public class PlayerAction : MonoBehaviour {
                     attackCooldDown = 0.75f;
                     //Turn player to face towards where he is aiming
                     gameManager.FacePlayerTowardsAim(0.5f);
-                    attackCollider = Physics.OverlapBox(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), new Vector3(1, 1, 1));
+                    attackCollider = Physics.OverlapBox(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), new Vector3(0.5f, 0.5f, 0.5f));
                     //Deal damage to all enemies hit
                     int targetHit = 0;
                     while (targetHit < attackCollider.Length)
@@ -156,17 +161,8 @@ public class PlayerAction : MonoBehaviour {
                         }
                         targetHit++;
                     }
-
-
-                    //Set animation to punching if standing still, else set animation to walking punch
-                    if (GetComponentInParent<PlayerMovement>().PlayerAnimations.GetFloat("Speed") <= 0.1f)
-                    {
-                        GetComponentInParent<PlayerMovement>().PlayerAnimations.Play("Player_Punch");
-                    }
-                    else
-                    {
-                        GetComponentInParent<PlayerMovement>().PlayerAnimations.Play("Player_WalkingPunch");
-                    }
+                    //Do a punching animation once
+                    GetComponentInParent<PlayerMovement>().PlayerAnimations.Play("Player_Punch");
                 }
                
                 

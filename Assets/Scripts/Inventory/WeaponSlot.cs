@@ -5,7 +5,9 @@ using UnityEngine.EventSystems;
 
 public class WeaponSlot : SlotScript {
 
-    private Weapon weapon;
+    [SerializeField]
+    private GameObject PlayerHand;
+
     public Weapon MyWeapon
     {
         get
@@ -29,8 +31,15 @@ public class WeaponSlot : SlotScript {
             icon.color = new Color(0, 0, 0, 0);
         }
 
+        //Remove weapon from the player's hand
+        foreach (Transform child in PlayerHand.transform)
+        {
+            Destroy(child.gameObject);
+        }
         //Update player's stats by removing this item's bonuses
         PlayerStats.MyInstance.RemoveFromPlayerStats(item);
+        //Update tool tiers when removing item
+        InventoryScript.MyInstance.UpdateTiers(item, false);
     }
 
 
@@ -75,6 +84,12 @@ public class WeaponSlot : SlotScript {
 
         //Update the player's stats
         PlayerStats.MyInstance.AddToPlayerStats(item);
+        //Update tiers
+        //Update tool tiers when removing item
+        InventoryScript.MyInstance.UpdateTiers(item, true);
+
+        //Visually show the item in the player's hand
+        Instantiate(MyWeapon.HandObject, PlayerHand.transform);
 
         //Return true if the item was succesfully added
         return true;

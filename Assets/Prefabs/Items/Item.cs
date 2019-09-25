@@ -20,6 +20,8 @@ public class Item : ScriptableObject {
     private GameObject itemObject;
 
 
+
+
     public Sprite MyIcon
     {
         get
