@@ -17,9 +17,8 @@ MonoBehaviour:
   itemObject: {fileID: 1101617421564688, guid: da923a9403d098247b9309ed35ca0a3b, type: 2}
   handObjectPlacement: {fileID: 1058903312386016, guid: f609fd80b3ee1aa4485c3c80c1e8b507,
     type: 2}
-  minimumDamage: 2
-  maximumDamage: 5
+  minimumDamage: 1
+  maximumDamage: 2
   damageType: 0
-  attackSpeed: 2
   strength: 0
   axeTier: 1

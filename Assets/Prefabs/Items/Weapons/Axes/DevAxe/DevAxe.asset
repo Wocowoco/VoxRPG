@@ -15,9 +15,10 @@ MonoBehaviour:
   stackSize: 0
   isUseable: 1
   itemObject: {fileID: 1775596898487638, guid: aa0b9b7a1fb94614fa2bd6b2dab1c972, type: 2}
+  handObjectPlacement: {fileID: 1058903312386016, guid: f609fd80b3ee1aa4485c3c80c1e8b507,
+    type: 2}
   minimumDamage: 100
   maximumDamage: 100
   damageType: 0
-  attackSpeed: 0.15
   strength: 0
   axeTier: 10000

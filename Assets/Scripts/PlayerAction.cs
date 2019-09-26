@@ -6,6 +6,8 @@ public class PlayerAction : MonoBehaviour {
 
     private Collider[] hitCollider;
     private Collider[] attackCollider;
+    [SerializeField]
+    private Transform actionLocation;
     private GameManage gameManager;
     private bool isAllowedToUpdate = true;
     private bool isReadyToAttack = true;
@@ -52,8 +54,7 @@ public class PlayerAction : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.F) && GetComponent<CharacterController>().isGrounded)
             {
                 //Get area to look if it hit
-                Transform hitZone = GameObject.Find("ActionZone").transform;
-                hitCollider = Physics.OverlapBox(hitZone.position, new Vector3(0.4f, 0.5f, 0.375f), hitZone.rotation);
+                hitCollider = Physics.OverlapBox(actionLocation.position, new Vector3(0.4f, 0.5f, 0.375f), actionLocation.rotation);
                 int length = 0;
                 while (length < hitCollider.Length)
                 {
@@ -86,10 +87,11 @@ public class PlayerAction : MonoBehaviour {
                     //Make the attack go on cooldown for the weapon attack speed
                     attackCooldDown = InventoryScript.MyInstance.MyWeaponSlot.MyWeapon.AttackSpeed;
                     //Turn player to face towards where he is aiming, lock it for the duration of the attack
-                    gameManager.FacePlayerTowardsAim(attackCooldDown + 0.2f);
+                    gameManager.FacePlayerTowardsAim(attackCooldDown);
 
-                    attackCollider = Physics.OverlapBox(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), new Vector3(1, 1, 1));
-                    
+                    //Get area to look if it hit
+                    attackCollider = Physics.OverlapBox(actionLocation.position, new Vector3(0.4f, 0.5f, 0.5f), actionLocation.rotation);
+
                     //Deal damage to all enemies hit
                     int targetHit = 0;
                     while (targetHit < attackCollider.Length)
@@ -134,7 +136,9 @@ public class PlayerAction : MonoBehaviour {
                     attackCooldDown = 0.75f;
                     //Turn player to face towards where he is aiming
                     gameManager.FacePlayerTowardsAim(0.5f);
-                    attackCollider = Physics.OverlapBox(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), new Vector3(0.5f, 0.5f, 0.5f));
+
+                    //Get area to look if it hit
+                    attackCollider = Physics.OverlapBox(actionLocation.position, new Vector3(0.4f, 0.5f, 0.375f), actionLocation.rotation);
                     //Deal damage to all enemies hit
                     int targetHit = 0;
                     while (targetHit < attackCollider.Length)

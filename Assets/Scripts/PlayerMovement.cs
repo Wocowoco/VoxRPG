@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject PlayerModel;
 
     public Animator PlayerAnimations;
+    public Animator PlayerFeetAnimations;
 
     private Vector3 moveDirection;
     private CharacterController playerController;
@@ -45,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         //Update Pivot's position
         PivotTransform.transform.position = new Vector3(transform.position.x, transform.position.y + PivotYOffset, transform.position.z);
@@ -101,15 +102,18 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetAxis("Vertical") != 0f || Input.GetAxis("Horizontal") != 0f)
             {
                 PlayerAnimations.SetFloat("Speed", 1f);
+                PlayerFeetAnimations.SetFloat("Speed", 1f);
             }
             else
             {
                 PlayerAnimations.SetFloat("Speed", 0f);
+                PlayerFeetAnimations.SetFloat("Speed", 0f);
             }
         }
         else
         {
             PlayerAnimations.SetFloat("Speed", 0f);
+            PlayerFeetAnimations.SetFloat("Speed", 0f);
         }
 
     }
